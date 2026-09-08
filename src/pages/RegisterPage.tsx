@@ -13,10 +13,6 @@ function RegisterPage() {
             Object.fromEntries(newValues.entries())
         ).then(() => {
             nav('/login')
-            return {
-                errors: [],
-                data: Object.fromEntries(newValues.entries())
-            }
         }).catch(err => {
             return {
                 errors: [err.message],
