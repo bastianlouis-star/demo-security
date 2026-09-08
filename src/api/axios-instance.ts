@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useAtom } from "jotai";
 import sessionState, { store } from "../store/session.state";
 
 const axiosInstance = axios.create({
