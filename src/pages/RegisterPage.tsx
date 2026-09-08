@@ -1,21 +1,33 @@
 import { Button, FormControl, InputLabel, MenuItem, Paper, Select, TextField } from "@mui/material"
 import { useActionState } from "react"
+import axiosInstance from "../api/axios-instance"
+import { useNavigate } from "react-router-dom"
 
 function RegisterPage() {
 
+    const nav = useNavigate()
+
     function submit(_, newValues: FormData) {
-        console.log(Object.fromEntries(newValues.entries()))
-        // envoyer les données vers l'api python
-        // rediriger vers la page de login
-        return {
-            errors: [],
-            data: Object.fromEntries(newValues.entries())
-        }
+        return axiosInstance.post(
+            '/auth/register', 
+            Object.fromEntries(newValues.entries())
+        ).then(() => {
+            nav('/login')
+            return {
+                errors: [],
+                data: Object.fromEntries(newValues.entries())
+            }
+        }).catch(err => {
+            return {
+                errors: [err.message],
+                data: Object.fromEntries(newValues.entries())
+            }
+        })
     }
 
     const [formState, action] = useActionState(submit, {
         errors: [],
-        data: { email: '', password: '', username: '', role: 'customer' }
+        data: { email: 'aa@a', password: '1234', username: 'a', role: 'admin' }
     })
 
     return <>
