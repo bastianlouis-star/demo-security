@@ -3,15 +3,22 @@ import { Button, Paper, TextField } from "@mui/material"
 import { useActionState } from "react"
 import axiosInstance from "../api/axios-instance"
 import { jwtDecode } from "jwt-decode"
+import { useAtom } from "jotai"
+import sessionState from "../store/session.state"
 
 function LoginPage() {
 
+    const [_, setSession] = useAtom(sessionState)
+
     function submit(_, data: FormData) {
         return axiosInstance.post('/auth/login', data).then((result) => {
-            console.log('ok', result)
             // gestion de la connection
-            const userInfo = jwtDecode(result.data.access_token)
-            console.log(userInfo)
+            const userInfo = jwtDecode(result.data.access_token) as any
+            setSession({ 
+                token: result.data.access_token,
+                role: userInfo.role,
+                id: userInfo.id 
+            })
             return { errors: [], data: Object.fromEntries(data.entries()) } 
         }).catch(err => {
             return { errors: [err.message], data: Object.fromEntries(data.entries()) }
