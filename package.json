@@ -10,15 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    // bibliothèque de composants react (Button, Dialog, ...) 
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^9.4.0",
     "@mui/material": "^9.4.0",
+    // bibliothèque facilitant les requètes http
     "axios": "^1.20.0",
+    // bibliothèque permettant de partager des états entre les composants
     "jotai": "^2.20.3",
+    // bibliothèque permettant de décoder des tokens jwt
     "jwt-decode": "^4.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    // bibliothèque permettant la gestion du routing
     "react-router-dom": "^6.30.6"
   },
   "devDependencies": {

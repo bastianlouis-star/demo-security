@@ -6,6 +6,7 @@ const axiosInstance = axios.create({
     timeout: 60000
 })
 
+// permet d'automatiser l'ajout du token dans les headers
 axiosInstance.interceptors.request.use((config) => {
     if(store.get(sessionState).token) {
         config.headers.Authorization = 'Bearer ' + store.get(sessionState).token
